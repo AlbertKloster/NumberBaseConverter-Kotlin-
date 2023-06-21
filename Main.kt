@@ -5,27 +5,30 @@ val converter = Converter()
 fun main() {
     var exit = false
     while (!exit) {
-        print("Do you want to convert /from decimal or /to decimal? (To quit type /exit) ")
-        when (Commands.getCommand(readln())) {
-            Commands.TO -> convertToDecimal()
-            Commands.FROM -> convertFromDecimal()
-            Commands.EXIT -> exit = true
+        print("Enter two numbers in format: {source base} {target base} (To quit type /exit) ")
+        val input = readln()
+        if (input == "/exit") {
+            exit = true
+        } else {
+            convertNumberToBase(input)
         }
     }
 }
 
-private fun convertToDecimal() {
-    print("Enter source number: ")
-    val number = readln()
-    print("Enter source base: ")
-    val base = readln().toInt()
-    println("Conversion to decimal result: ${converter.baseToDecimal(number, base)}")
+private fun convertNumberToBase(input: String) {
+    val (sourceBase, targetBase) = input.split(" ")
+    var back = false
+    while (!back) {
+        print("Enter number in base $sourceBase to convert to base $targetBase (To go back type /back) ")
+        val number = readln()
+        if (number == "/back") {
+            back = true
+        } else {
+            println("Conversion result: ${convertFromDecimal(convertToDecimal(number, sourceBase), targetBase)}")
+        }
+    }
 }
 
-private fun convertFromDecimal() {
-    print("Enter a number in decimal system: ")
-    val decimalNumber = readln()
-    print("Enter the target base: ")
-    val base = readln().toInt()
-    println("Conversion result: ${converter.decimalToBase(decimalNumber, base)}\n")
-}
+private fun convertToDecimal(number: String, base: String) = converter.baseToDecimal(number, base)
+
+private fun convertFromDecimal(decimalNumber: String, base: String) = converter.decimalToBase(decimalNumber, base)
