@@ -11,12 +11,14 @@ Converting from decimal to octal and hexadecimal isn't much different from conve
 | 110 | 6 |
 | 13 | 5 |
 | 1 | 1 |
+
 Result: <b>11010</b> = <b>1568</b>
 
 | Quotient | Remainder of 16 |
 | -------- | --------------- |
 | 110 | 14 (E) |
 | 6 | 6 |
+
 Result: <b>11010</b> = <b>6E16</b>
 
 <i>In this project, you need to understand and implement the conversion algorithm.</i>
