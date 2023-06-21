@@ -15,7 +15,7 @@ class Converter {
             if (remainder < 10) {
                 stringBuilder.append(remainder.toString())
             } else {
-                val asciiChar = ('A'.code + remainder - 10).toChar()
+                val asciiChar = ('a'.code + remainder - 10).toChar()
                 stringBuilder.append(asciiChar)
             }
 
@@ -23,6 +23,19 @@ class Converter {
         }
 
         return stringBuilder.reverse().toString()
+    }
+
+    fun baseToDecimal(number: String, base: Int): String {
+        var decimal = 0L
+        var power = 1L
+
+        for (i in number.length - 1 downTo 0) {
+            val digit = if (number[i].isDigit()) number[i].toString().toLong() else (number[i].code - 'a'.code + 10).toLong()
+            decimal += digit * power
+            power *= base
+        }
+
+        return decimal.toString()
     }
 
 }

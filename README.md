@@ -1,55 +1,79 @@
-# Stage 1/4: Convert decimals
+# Stage 2/4: Convert to decimal
 ## Description
-In daily life, we mostly use the decimal numeral system, but still, there are many other ways to represent numbers. For example, when working with computers, you'll probably deal with binary, octal, and hexadecimal numbers. It's really nice to have a tool that can help you easily and correctly convert numbers from one system to another: in this project, we will build such a tool step-by-step.
+At this point, the user needs to restart the program each time after converting just one number, which is very inconvenient. Let's fix that and make your program prompt the user for more numbers until the user is ready to quit.
 
-In the first stage, you need to implement conversion from decimal to binary, octal, and hexadecimal. The program will read the user's decimal number and the user's target <a href="https://en.wikipedia.org/wiki/Radix">radix</a> (or base). Then, it will output the given number in the corresponding base.
+Also, we will add the reverse conversion: from binary, octal, and hexadecimal systems to decimal. Converting from octal, hexadecimal, or any other system to decimal works almost the same way as with binary numbers, only the base is different. See for yourself:
 
-Converting from decimal to octal and hexadecimal isn't much different from converting to binary. The algorithm is really similar to binary conversion, only the base number is different with 8 or 16 in place of 2. See some examples of converting the number 110 from decimal to octal and hexadecimal below:
+1726<sub>8</sub> = 1∗512 + 7∗64 + 2∗8 + 6∗1 = 982<sub>10</sub>
 
-| Quotient |	Remainder of 8 |
-| -------- | ----------------- |
-| 110 | 6 |
-| 13 | 5 |
-| 1 | 1 |
+A3C<sub>16</sub> = 10∗256 + 3∗16 + 12∗1 = 2620<sub>10</sub>
 
-Result: <b>11010</b> = <b>1568</b>
-
-| Quotient | Remainder of 16 |
-| -------- | --------------- |
-| 110 | 14 (E) |
-| 6 | 6 |
-
-Result: <b>11010</b> = <b>6E16</b>
-
-<i>In this project, you need to understand and implement the conversion algorithm.</i>
+<i>In this project, you need to understand and implement the conversion algorithm. Do not try to find ready-made functions that will give you a result but do not require an understanding of the algorithm. You will learn more if you implement it yourself!</i>
 
 ## Objectives
-Your program's output should consist of the following three lines:
+Your program should output the prompt `Do you want to convert /from decimal or /to decimal? (To quit type /exit)` to prompt the user for their next move. The possible commands are `/from`, `/to`, and `/exit`.
 
-1. On the first line, the prompt Enter number in decimal system: is shown, and the user inputs a decimal number to be converted.
-2. On the second one, the prompt Enter target base: is printed, and the user enters the target base (2, 8, or 16).
-3. On the third one, the message Conversion result: is printed, followed by the correct number representation in the given base.
+- If the user types `/from`, the program should behave as in the previous stage and convert the user's number from the decimal system to binary, octal, or hexadecimal.
+- If the user types `/to`, the program should:
+  1. Print the prompt `Enter source number:` and read the user input number to be converted to decimal.
+  2. Print the prompt `Enter source base:` and read the target base (2, 8, or 16).
+  3. Output the message `Conversion to decimal result:` followed by the number's representation in the decimal system.
+- If the user types `/exit`, the program stops. Otherwise, it should process the command and prompt for the next one.
 
-## Example
+## Examples
 The greater-than symbol followed by a space (`> `) represents the user input. Note that it's not part of the input.
 
 ### Example 1:
 ```
-Enter number in decimal system: > 8
-Enter target base: > 16
+Do you want to convert /from decimal or /to decimal? (To quit type /exit) > /from
+Enter a number in decimal system: > 8
+Enter the target base: > 16
 Conversion result: 8
+
+Do you want to convert /from decimal or /to decimal? (To quit type /exit) > /from
+Enter a number in decimal system: > 101
+Enter the target base: > 2
+Conversion result: 1100101
+
+Do you want to convert /from decimal or /to decimal? (To quit type /exit) > /from
+Enter a number in decimal system: > 103
+Enter the target base: > 8
+Conversion result: 147
+
+Do you want to convert /from decimal or /to decimal? (To quit type /exit) > /exit
 ```
 
 ### Example 2:
 ```
-Enter number in decimal system: > 101
-Enter target base: > 2
-Conversion result: 1100101
+Do you want to convert /from decimal or /to decimal? (To quit type /exit) > /to
+Enter source number: > ff
+Enter source base: > 16
+Conversion to decimal result: 255
+
+Do you want to convert /from decimal or /to decimal? (To quit type /exit) > /to
+Enter source number: > 71
+Enter source base: > 8
+Conversion to decimal result: 57
+
+Do you want to convert /from decimal or /to decimal? (To quit type /exit) > /to
+Enter source number: > 111001
+Enter source base: > 2
+Conversion to decimal result: 57
+
+Do you want to convert /from decimal or /to decimal? (To quit type /exit) > /exit
 ```
 
 ### Example 3:
 ```
-Enter number in decimal system: > 103
-Enter target base: > 8
-Conversion result: 147
+Do you want to convert /from decimal or /to decimal? (To quit type /exit) > /to
+Enter source number: > 25a
+Enter source base: > 16
+Conversion to decimal result: 602
+
+Do you want to convert /from decimal or /to decimal? (To quit type /exit) > /from
+Enter number in decimal system: > 602
+Enter target base: > 16
+Conversion result: 25a
+
+Do you want to convert /from decimal or /to decimal? (To quit type /exit) > /exit
 ```
